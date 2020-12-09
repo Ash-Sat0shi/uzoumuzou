@@ -16,7 +16,7 @@ oled_reset = digitalio.DigitalInOut(board.D4)
 WIDTH = 128
 HEIGHT = 32  # Change to 64 if needed
 #HEIGHT = 64
-BORDER = 2
+BORDER = 1
 
 # Use for I2C.
 i2c = board.I2C()
@@ -50,14 +50,11 @@ draw.rectangle(
 )
 
 # Load default font.
-font = ImageFont.load_default()
-
-# Draw Some Text
-text = "Hello!"
-(font_width, font_height) = font.getsize(text)
+fontsize = 24
+font = ImageFont.truetype("neon_pixel.ttf",fontsize)
 
 draw.text(
-    (oled.width // 2 - font_width // 1, oled.height // 2 - font_height // 1),
+    (5,5),
     myip,
     font=font,
     fill=255,

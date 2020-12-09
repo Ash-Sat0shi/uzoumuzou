@@ -32,13 +32,15 @@ def random_with_N_digits(n):
     range_end = (10**n)-1
     return randint(range_start, range_end)
 
-try:
-    while True:
-        time.sleep(0.05)     # to avoid false positive at the first time python runs
-        flag1 = GPIO.input(PIN_IN1) == GPIO.HIGH
+def main():
+
+    try:
+        while True:
+            time.sleep(0.05)     # to avoid false positive at the first time python runs
+            flag1 = GPIO.input(PIN_IN1) == GPIO.HIGH
         
-        if flag1 == True:
-            ########################ボタンが押されたら…#######################
+            if flag1 == True:
+                ########################ボタンが押されたら…#######################
                 value = str(random_with_N_digits(8))
                 image = Image.new("1", (128, 32))
                 draw = ImageDraw.Draw(image)
@@ -49,13 +51,15 @@ try:
                 disp.image(image)
                 disp.show()
             
-        else:
+            else:
             ########################ボタンが押されていないとき#######################
-            disp.fill(0)
-            disp.show()
-except KeyboardInterrupt:
-    pass
+                disp.fill(0)
+                disp.show()
+    except KeyboardInterrupt:
+        pass
 
-finally:
-    GPIO.cleanup()
-            
+    finally:
+        GPIO.cleanup()
+
+if __name__ == '__main__':
+    main()
