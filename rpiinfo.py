@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import time
 import subprocess
+import sys
  
 from board import SCL, SDA
 import busio
@@ -50,7 +51,7 @@ font = ImageFont.load_default()
 # Some other nice fonts to try: http://www.dafont.com/bitmap.php
 # font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 9)
  
-while True:
+def func():
  
     # Draw a black filled box to clear the image.
     draw.rectangle((0, 0, width, height), outline=0, fill=0)
@@ -73,7 +74,14 @@ while True:
     draw.text((x, top + 16), MemUsage, font=font, fill=255)
     draw.text((x, top + 25), Disk, font=font, fill=255)
  
-    # Display image.
+    # Display image for 3 sec.
     disp.image(image)
     disp.show()
-    time.sleep(0.1)
+    time.sleep(3)
+    draw.rectangle((0, 0, width, height), outline=0, fill=0)
+    disp.image(image)
+    disp.show()
+
+if __name__ == '__main__':
+    func()
+    sys.exit("Display program exitted")

@@ -29,7 +29,7 @@ oled.fill(0)
 oled.show()
 
 # Load default font.
-fontsize = 32
+fontsize = 30
 font = ImageFont.truetype("neon_pixel.ttf",fontsize)
 # Create blank image for drawing.
 image = Image.new("1", (oled.width, oled.height))
@@ -46,21 +46,23 @@ def main():
             proc = subprocess.run("sudo systemctl status " + args[1], shell=True, stdout=PIPE, stderr=PIPE, text=True)
             status = proc.stdout
             #print(status)
-            l = status.splitlines()[4]
-            print("Status of " + args[1] + ": "+ l[11:])
+            k = status.split().index("Active:") + 1
+            l = status.split()[k]
+            #print(l)
+            #print("Status of " + args[1] + ": "+ l)
             #print('STDOUT: {}'.format(status))
             
             frame()
-            draw.text((3,3), l[11:18], font=font, fill=255)
+            draw.text((3,3), l, font=font, fill=255)
             oled.image(image)
             oled.show()
-            time.sleep(5)
+            time.sleep(0.9)
             
             oled.fill(0)
             frame()
             oled.image(image)
             oled.show()
-            time.sleep(0.2)
+            time.sleep(0.1)
         
         
     except KeyboardInterrupt:

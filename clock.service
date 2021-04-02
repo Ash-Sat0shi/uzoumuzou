@@ -1,0 +1,11 @@
+[Unit]
+Description= python3 clock on oled display
+
+[Service]
+WorkingDirectory=/home/pi
+ExecStart=/usr/bin/python3 /home/pi/clock.py
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target

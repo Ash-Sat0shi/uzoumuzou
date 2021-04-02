@@ -27,7 +27,7 @@ oled.fill(0)
 oled.show()
 
 # Load default font.
-fontsize = 32
+fontsize = 24
 font = ImageFont.truetype("neon_pixel.ttf",fontsize)
 # Create blank image for drawing.
 image = Image.new("1", (oled.width, oled.height))
@@ -40,26 +40,22 @@ def frame():
 def main():
     try:
         while True:
-            ip = myip.split('.',4)
-            for i in range(4):
                 frame()
-                #print(ip[i])
-                octet = str(ip[i])
                 draw.text(
-                (WIDTH // 2 - 15, 2),
-                octet,
+                (3, 5),
+                myip,
                 font=font,
                 fill=255,)
                 # Display image
                 oled.image(image)
                 oled.show()
-                time.sleep(0.1)
+                time.sleep(0.4)
                 
                 oled.fill(0)
                 frame()
                 oled.image(image)
                 oled.show()
-                time.sleep(0.01)
+                time.sleep(0.1)
         
     except KeyboardInterrupt:
         pass
