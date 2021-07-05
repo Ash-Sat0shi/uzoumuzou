@@ -1,0 +1,142 @@
+<script>
+    google.script.run.withSuccessHandler(onload).getList();
+    // google.script.run.withSuccessHandler(pulldownvalues).getSheetNameList();
+    // let btn1 = document.getElementById('btn1');
+    // let btn3 = document.getElementById('btn3');
+    let selectedss = "";
+  
+  function onload(receivedata){
+    console.log("P一覧受信できました：");
+    console.table(receivedata[0]);
+    console.table(receivedata[1]);
+  
+  // ----------------------------  VUE  ---------------------------- //
+    const app = new Vue({
+      el: "#app",
+      data: {
+        lists: receivedata[0],
+        sheetlist: receivedata[1],
+        selected: [],
+        message: '',
+  
+      },
+      
+      computed: {
+        Team1 () {return this.lists.filter(list=> list.team=='1')},
+        Team2 () {return this.lists.filter(list=> list.team=='2')},
+        Team3 () {return this.lists.filter(list=> list.team=='3')},
+        Team4 () {return this.lists.filter(list=> list.team=='4')},
+        Team5 () {return this.lists.filter(list=> list.team=='5')},
+        Team6 () {return this.lists.filter(list=> list.team=='6')},
+        Team7 () {return this.lists.filter(list=> list.team=='7')},
+        Team8 () {return this.lists.filter(list=> list.team=='8')},
+        Team9 () {return this.lists.filter(list=> list.team=='9')},
+        Team10 () {return this.lists.filter(list=> list.team=='10')},
+        Team11 () {return this.lists.filter(list=> list.team=='11')},
+        Team12 () {return this.lists.filter(list=> list.team=='12')},
+        Team13 () {return this.lists.filter(list=> list.team=='13')},
+        Team14 () {return this.lists.filter(list=> list.team=='14')},
+        Team15 () {return this.lists.filter(list=> list.team=='15')},
+        Team16 () {return this.lists.filter(list=> list.team=='16')},
+        Team17 () {return this.lists.filter(list=> list.team=='17')},
+        Team18 () {return this.lists.filter(list=> list.team=='18')},
+        Team19 () {return this.lists.filter(list=> list.team=='19')},
+        Team20 () {return this.lists.filter(list=> list.team=='20')},
+        TeamX () {return this.lists.filter(list=> list.team=='X')},
+      },
+      methods:{
+        dragList(event, dragId){
+          event.dataTransfer.effectAllowed = 'move'
+          event.dataTransfer.dropEffect = 'move'
+          event.dataTransfer.setData('list-id',dragId)
+        },
+        dropList(event, dropTeam){
+          const dragId = event.dataTransfer.getData('list-id')
+          const dragList = this.lists.find(list => list.id == dragId)
+          dragList.team = dropTeam
+          console.table(this.lists)
+        },
+        submit: function(){
+          let selectedsheetname = this.selected;
+          let editeddata = this.lists;
+          console.log(selectedsheetname + 'が選択され、入力完了押されました');
+          //console.log(JSON.stringify(editeddata));
+          google.script.run.withSuccessHandler(onsubmit).appendSS(selectedsheetname, editeddata);
+        },
+        createss: function(){
+          let newssname = this.message;
+          console.log(newssname + 'という名前のシートを作成します');
+          google.script.run.withSuccessHandler(aftercreateSS).createSS(newssname);
+  
+        }
+      }
+    })
+  }
+  // ----------------------------  END VUE  ---------------------------- //
+  /*
+  function pulldownvalues(receivedata){
+    //console.table(receivedata);
+    let pulldown = document.getElementById("pulldown");
+    let one = "<select name='state' class='form-select'>";
+    let two =　"";
+    for(let i=0; i<receivedata.length; i++){
+      two = two +   "<option value=" + receivedata[i] + ">" + receivedata[i] + "</option>"
+    };
+    //console.log(two);
+    let three ="</select>";
+    pulldown.innerHTML = one + two + three;
+    let select_state = document.querySelector("select[name=state]");
+      select_state.addEventListener('change',function(){
+      //プルダウンメニュー変更があった際にプルダウンの値を取得
+          let selectedss = select_state.value;
+      console.log(selectedss);
+    });
+  };
+  
+  btn1.addEventListener('click', function() {
+    console.log("クリックされたよ");
+    let newssname = document.getElementById("newssname").value;
+    console.log(newssname);
+    google.script.run.withSuccessHandler(aftercreateSS).createSS(newssname);
+  });
+  
+  btn3.addEventListener('click', function() {
+    console.log("入力完了クリックされたよ");
+    console.log(selectedss);
+  });
+  
+  */
+  
+  function aftercreateSS(url){
+    console.log(url);
+    window.open(url, '_top');
+  };
+  
+  function onsubmit(e){
+    console.log(e[0]);
+    console.table(e[1]);
+    //console.log(e[2]);
+  }
+  
+  
+  /*
+    lists: [
+      {
+        id: 1, 
+        name: 'メンバー1',
+        team: '1'
+      },
+      {
+        id: 2, 
+        name: 'メンバー2',
+        team: '2'
+      },
+      {
+        id: 3, 
+        name: 'メンバー3',
+        team: '3'
+      },
+    ]
+  */
+  
+  </script>
