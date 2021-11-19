@@ -1,0 +1,87 @@
+/* @import url(//fonts.googleapis.com/css?family=Vibur); */
+@font-face {
+	font-family: 'MyFont';
+	src: url(./NixieOne.ttf);
+}
+
+* {
+    cursor: none !important;
+  }
+
+html,body{
+  height:100%
+}
+body {
+   background: #112 url(https://images.unsplash.com/photo-1592853598064-5a7fa150592c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80)  center no-repeat; 
+  background-size:cover;
+  margin:0
+}
+.logo {
+  text-align: center;
+  width: 65%;
+  height: 250px;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+   user-select: none;
+}
+
+#cursor{
+    position: fixed;     /* 絶対位置になるように指定 */
+    z-index: 2;          /* 重なり順を上に指定。他の要素に合わせて数字を大きくしてください。 */
+    pointer-events: none;/*【重要】マウス直下に常に画像があるので、全てをクリックできなくなる。noneにして対応*/
+  }
+
+.logo b{
+  font-size: 15em;
+  font-family: MyFont;
+  color: rgb(255, 236, 218);
+  text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em #ff0000, 0 0 0.5em #ff0000, 0 0 0.1em #ff6600, 0 10px 3px #000;
+}
+.logo b span{
+  animation: blink linear infinite 2s;
+}
+.logo b span:nth-of-type(2){
+  animation: blink linear infinite 3s;
+}
+
+.logo b span:nth-of-type(3){
+    animation: blink linear infinite 1s;
+  }
+@keyframes blink {
+  78% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  79%{
+     color: #333;
+  }
+  80% {
+    
+    text-shadow: none;
+  }
+  81% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  82% {
+    color: #333;
+    text-shadow: none;
+  }
+  83% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  92% {
+    color: #333;
+    text-shadow: none;
+  }
+  92.5% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+}
+
